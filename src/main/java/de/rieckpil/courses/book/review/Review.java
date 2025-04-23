@@ -1,10 +1,10 @@
 package de.rieckpil.courses.book.review;
 
-import java.time.LocalDateTime;
-
 import de.rieckpil.courses.book.management.Book;
 import de.rieckpil.courses.book.management.User;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
@@ -26,9 +26,11 @@ public class Review {
   @Column(nullable = false)
   private LocalDateTime createdAt;
 
-  @ManyToOne private Book book;
+  @ManyToOne
+  private Book book;
 
-  @ManyToOne private User user;
+  @ManyToOne
+  private User user;
 
   public Long getId() {
     return id;
@@ -89,22 +91,22 @@ public class Review {
   @Override
   public String toString() {
     return "Review{"
-        + "id="
-        + id
-        + ", title='"
-        + title
-        + '\''
-        + ", content='"
-        + content
-        + '\''
-        + ", rating="
-        + rating
-        + ", createdAt="
-        + createdAt
-        + ", book="
-        + book
-        + ", user="
-        + user
-        + '}';
+      + "id="
+      + id
+      + ", title='"
+      + title
+      + '\''
+      + ", content='"
+      + content
+      + '\''
+      + ", rating="
+      + rating
+      + ", createdAt="
+      + createdAt
+      + ", book="
+      + book
+      + ", user="
+      + user
+      + '}';
   }
 }

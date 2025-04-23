@@ -3,6 +3,7 @@ spring:
     password: test
     username: test
     url: jdbc:postgresql://localhost:5432/postgres
+    debug : true
   security:
     oauth2:
       resourceserver:
