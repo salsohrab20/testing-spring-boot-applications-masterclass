@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 /*
  * Whenever the entity manager is involved we have
  * a persistent context with flush mode configured
