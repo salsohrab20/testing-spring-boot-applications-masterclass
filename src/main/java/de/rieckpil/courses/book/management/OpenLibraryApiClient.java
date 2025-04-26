@@ -48,11 +48,11 @@ public class OpenLibraryApiClient {
     book.setAuthor(content.get("authors").get(0).get("name").asText());
     book.setPublisher(content.get("publishers").get(0).get("name").asText("n.A."));
     book.setPages(content.get("number_of_pages").asLong(0));
-    book.setDescription(content.get("notes") == null ? "n.A" : content.get("notes").asText("n.A."));
+    book.setDescription(content.get("notes") == null ? "N.A" : content.get("notes").asText("N.A."));
     book.setGenre(
         content.get("subjects") == null
-            ? "n.A"
-            : content.get("subjects").get(0).get("name").asText("n.A."));
+            ? "N.A"
+            : content.get("subjects").get(0).get("name").asText("N.A."));
     return book;
   }
 }
