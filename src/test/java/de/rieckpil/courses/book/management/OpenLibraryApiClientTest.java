@@ -14,6 +14,7 @@ import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -139,5 +140,32 @@ class OpenLibraryApiClientTest {
 
     });
   }
+
+  @Test
+  void shouldRetryWhenRemoteSystemIsSlowOrFailing(){
+    this.server.enqueue(
+      new MockResponse().setResponseCode(500).setBody("Sorry, the system is down")
+    );
+
+    this.server.enqueue(
+      new MockResponse()
+        .addHeader("Content-Type", "application/json")
+        .setResponseCode(200)
+        .setBody(VALID_RESPONSE)
+        .setBodyDelay(2, TimeUnit.SECONDS));
+
+    this.server.enqueue(
+      new MockResponse()
+        .addHeader("Content-Type", "application/json")
+        .setResponseCode(200)
+        .setBody(VALID_RESPONSE)
+    );
+
+    Book result = cut.fetchMetadataForBook(ISBN);
+    assertEquals(ISBN, result.getIsbn());
+    assertNull(result.getId());
+
+  }
+
 
 }
